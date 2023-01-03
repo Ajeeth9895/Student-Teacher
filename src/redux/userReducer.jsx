@@ -4,20 +4,27 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const userReducer = createSlice({
   name: "users",
-  // set initial details 
+  
+  // set initial values
   initialState: {
     studentData: [
       {
         studentName: "Ajeeth",
+        email:"ajeeth@yahoo.com",
         mentorName: "Raj",
+        batch:"B38WET"
       },
       {
         studentName: "Vishnu",
+        email:"vishnu@gmail.com",
         mentorName: "Balaji",
+        batch:"B38WET"
       },
       {
         studentName: "Kumar",
+        email:"kumar@yahoo.com",
         mentorName: "Raj",
+        batch:"B38WET"
       }
     ]
   },

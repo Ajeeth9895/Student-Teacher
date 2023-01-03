@@ -18,18 +18,22 @@ function AllUsers() {
           <tr>
             <th>S.NO</th>
             <th>Student Name</th>
+            <th>Email</th>
             <th>Mentor Name</th>
+            <th>Batch</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-         {/* map function to get data */}
+         {/* map function to iterate data */}
           {data.map((e, i) => {
             return (
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{e.studentName}</td>
+                <td>{e.email}</td>
                 <td>{e.mentorName}</td>
+                <td>{e.batch}</td>
                 <td>
                   {/* Edit function button */}
                   <Button variant="primary" onClick={()=>navigate(`/add-users/${i}`)}>Edit</Button>

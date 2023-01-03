@@ -6,12 +6,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addUser } from "../redux/userReducer";
 import { editUser } from "../redux/userReducer";
 
-//Add users and edit users done in same page based on 'id';
+//Add users and edit users are done in same page based on 'id';
 function AddUsers() {
   let [studentName, setStudent] = useState("");
+  let[email,setEmail] = useState("")
   let [mentorName, setMentor] = useState("");
+  let [batch,setBatch] = useState("")
 
-  // params to get id value
+  // params to get id value from url
   let { id } = useParams();
   let data = useSelector((state) => state.users.studentData);//redux function to get student data from userRedux.jsx
   let dispatch = useDispatch();
@@ -22,7 +24,9 @@ function AddUsers() {
     //we use condition for add and edit user based on 'id'
     if (id) {
       setStudent(data[id].studentName);
+      setEmail(data[id].email)
       setMentor(data[id].mentorName);
+      setBatch(data[id].batch)
     } else {
       navigate("/add-users");
     }
@@ -32,10 +36,10 @@ function AddUsers() {
   let submitHandler = () => {
     //we use condition for addUser and editUser based on 'id'
     if (id) {
-      dispatch(editUser({ index: id, data: { studentName, mentorName } }));
+      dispatch(editUser({ index: id, data: { studentName, email, mentorName, batch } }));
       navigate("/all-users");
     } else {
-      dispatch(addUser({ studentName, mentorName }));
+      dispatch(addUser({studentName,email, mentorName, batch }));
       navigate("/all-users");
     }
   };
@@ -54,6 +58,16 @@ function AddUsers() {
       </Form.Group>
 
       <Form.Group className="mb-3">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
         <Form.Label>Mentor Name</Form.Label>
         <Form.Control
           type="text"
@@ -62,6 +76,17 @@ function AddUsers() {
           onChange={(e) => setMentor(e.target.value)}
         />
       </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Batch</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Batch"
+          value={batch}
+          onChange={(e) => setBatch(e.target.value)}
+        />
+      </Form.Group>
+
       <Button variant="primary" onClick={() => submitHandler()}>
         Submit
       </Button>
